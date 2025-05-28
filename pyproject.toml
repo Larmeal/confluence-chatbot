@@ -1,0 +1,17 @@
+[project]
+name = "langchain_experiment"
+version = "0.1.0"
+description = "The project aim to POC the document summary from Confluence with using Langchain powered by Gemini"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "atlassian-python-api>=4.0.4",
+    "ipykernel>=6.29",
+    "langchain>=0.3.25",
+    "langchain-community>=0.3.24",
+    "langchain-google-genai>=2.1.4",
+    "langchain-pinecone>=0.2.6",
+    "markdownify>=1.1.0",
+    "ruff>=0.11.11",
+    "streamlit>=1.45.1",
+]
