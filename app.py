@@ -215,9 +215,10 @@ else:
                                 page_title = doc.metadata.get("title", "Untitled Page")
                                 st.markdown(f"**Page:** {page_title}")
                                 st.markdown(f"**Source URL:** {source_url}")
+                                doc_length = 200
                                 content_snippet = (
-                                    doc.page_content[:200] + "..."
-                                    if len(doc.page_content) > 200
+                                    doc.page_content[:doc_length] + "..."
+                                    if len(doc.page_content) > doc_length
                                     else doc.page_content
                                 )
                                 st.caption(content_snippet)
