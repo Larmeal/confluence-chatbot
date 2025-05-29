@@ -76,12 +76,17 @@ def initialize_rag_components(_config):
     )
     if vector_store is None:
         st.error(
-            "Failed to create vector store. This might be due to issues with document processing or embedding generation (e.g., API errors, rate limits). Check logs for details."
+            "Failed to create vector store. This might be due to issues with document "
+            "processing or embedding generation (e.g., API errors, rate limits). Check logs for details."
         )
         return None, None
 
     try:
-        llm = get_google_llm(google_api_key=_config["gemini_api_key"])
+        llm = get_google_llm(
+            google_api_key=_config["gemini_api_key"],
+            # model_name="gemini-2.5-pro-preview-03-25",
+            temperature=0.6,
+        )
     except Exception as e:
         st.error(
             f"Failed to initialize Google LLM: {e}. Check your GOOGLE_API_KEY and API permissions."

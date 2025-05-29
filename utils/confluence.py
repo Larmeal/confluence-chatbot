@@ -22,6 +22,7 @@ def load_confluence_documents(
             space_key=space_key,
             include_restricted_content=False,
             include_attachments=False,
+            keep_markdown_format=True,
             limit=max_docs,
         )
         # Load documents from a specific space, optionally limiting the number

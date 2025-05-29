@@ -1,12 +1,11 @@
 import logging
 
 from pinecone import Pinecone, ServerlessSpec
-from langchain_core.documents import Document
 from langchain_pinecone import PineconeVectorStore
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
-from langchain_community.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
-from langchain.memory import ConversationBufferMemory
+from langchain.prompts import PromptTemplate
+
 
 logger = logging.getLogger(__name__)
 
@@ -130,12 +129,40 @@ def create_conversational_rag_chain(llm, vector_store, memory):
         search_type="similarity",
         search_kwargs={"k": 5},  # Retrieve top 5 relevant chunks
     )
+
+    system_prompt = """
+    You are an AI assistant expert in providing information from Confluence documents.
+    You have the ability to communicate in multiple languages, so you must respond in the language that the user uses to ask the question.
+    Your role is to answer questions based *only* on the provided context from these documents.
+    Follow these instructions carefully:
+    1.  Analyze the 'Context' section below, which contains relevant excerpts from Confluence.
+    2.  Based *solely* on this Context, answer the 'Question'.
+    3.  If the Context does not contain the information to answer the Question, state clearly: "I cannot find an answer to that in the provided Confluence documents." Do not try to guess or use external knowledge.
+    4.  If the user asks a question that is not related to the Confluence documents (e.g., a general knowledge question, or a greeting like "hello"), politely respond that you are designed to answer questions about the provided Confluence documentation. For example: "I am an assistant for our Confluence documents. Please ask me a question about them."
+    5.  Keep your answers concise and directly relevant to the question and context.
+    6.  Do not make up information or offer opinions.
+    7.  Answer in a professional and helpful tone.
+    8.  Finally, if the available data is not sufficient to answer the question, please provide the contact information of the person responsible for that project. If you cannot find the contact, politely decline to answer.
+
+    Context:
+    {context}
+
+    Question: {question}
+
+    Helpful Answer:"""
+
+    qa_chain_prompt = PromptTemplate(
+        input_variables=["context", "question"],
+        template=system_prompt,
+    )
+
     qa_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
         retriever=retriever,
         memory=memory,
         return_source_documents=True,
         verbose=True,
+        combine_docs_chain_kwargs={"prompt": qa_chain_prompt},
     )
     logger.info("Conversational RAG chain created.")
     return qa_chain
