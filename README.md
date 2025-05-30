@@ -38,7 +38,11 @@ This repository provides an example of how to build a Retrieval-Augmented Genera
     CONFLUENCE_USER="your_confluence_email@example.com"
     PINECONE_API_KEY="your_pinecone_api_token"
     CONFLUENCE_API_KEY="your_confluence_api_token"
-    CONFLUENCE_SPACE="YOUR_SPACE_KEY"
+    CONFLUENCE_SPACE="your_space_key"
+    PINECONE_INDEX_NAME="your_pinecone_index_database"
+    PINECONE_CLOUD="your_pinecone_cloud_provider"
+    PINECONE_REGION="your_pinecone_region_of_database"
+    PINECONE_NAMESPACE="your_pinecone_namespace"
     # CONFLUENCE_MAX_DOCS="5" # Optional: limit documents for faster testing
     ```
     *   Replace placeholders with your actual Google API key and Confluence details.
