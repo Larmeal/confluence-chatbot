@@ -66,23 +66,23 @@ def get_google_embeddings(
         raise
 
 
-def create_vector_store(documents: list, embeddings_model, pinecore_api_key):
+def create_vector_store(documents: list, embeddings_model, app_config: dict):
     """Creates a Pinecore vector store from document chunks."""
     if not documents:
         logger.warning("No document chunks to create vector store from.")
         return None
     try:
         logger.info(f"Creating vector store from {len(documents)} chunks.")
-        pc = Pinecone(api_key=pinecore_api_key)
-        index_name = "landchain-confluence"
+        pc = Pinecone(api_key=app_config.get("pinecone_api_key"))
+        index_name = app_config.get("pinecone_index_name")
         if not pc.has_index(index_name):
             pc.create_index(
                 name=index_name,
                 dimension=768,
                 metric="cosine",
                 spec=ServerlessSpec(
-                    cloud="aws",
-                    region="us-east-1",
+                    cloud=app_config.get("pinecone_cloud"),
+                    region=app_config.get("pinecone_region"),
                 ),
             )
 
@@ -91,8 +91,8 @@ def create_vector_store(documents: list, embeddings_model, pinecore_api_key):
         vector_store = PineconeVectorStore(
             index=index,
             embedding=embeddings_model,
-            pinecone_api_key=pinecore_api_key,
-            namespace="landchain-confluence-dev",
+            pinecone_api_key=app_config.get("pinecone_api_key"),
+            namespace=app_config.get("pinecone_namespace"),
         )
 
         ids = []

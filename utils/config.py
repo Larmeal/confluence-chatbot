@@ -13,6 +13,10 @@ def load_config():
         "confluence_api_key": os.getenv("CONFLUENCE_API_KEY"),
         "confluence_space": os.getenv("CONFLUENCE_SPACE"),
         "confluence_max_docs": os.getenv("CONFLUENCE_MAX_DOCS", 50),
+        "pinecone_index_name": os.getenv("PINECONE_INDEX_NAME"),
+        "pinecone_cloud": os.getenv("PINECONE_CLOUD"),
+        "pinecone_region": os.getenv("PINECONE_REGION"),
+        "pinecone_namespace": os.getenv("PINECONE_NAMESPACE"),
     }
     # Basic validation
     required_keys = [
@@ -22,6 +26,10 @@ def load_config():
         "confluence_username",
         "confluence_api_key",
         "confluence_space",
+        "pinecone_index_name",
+        "pinecone_cloud",
+        "pinecone_region",
+        "pinecone_namespace",
     ]
     for key in required_keys:
         if not config[key]:

@@ -72,7 +72,7 @@ def initialize_rag_components(_config: dict):
     vector_store = create_vector_store(
         documents=documents,
         embeddings_model=embeddings_model,
-        pinecore_api_key=_config["pinecone_api_key"],
+        app_config=_config,
     )
     if vector_store is None:
         st.error(
