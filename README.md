@@ -3,6 +3,7 @@
 This repository provides an example of how to build a Retrieval-Augmented Generation (RAG) system using LangChain to work with Confluence documents. It leverages a large language model (LLM), such as Gemini, to create a chatbot application that assists Data Engineers with maintenance tasks.
 
 ![Chatbot Architecture](./img/langchain_confluence.jpg?raw=true "Chatbot Architecture")
+![streamlit](./img/streamlit_app.png?raw=true "streamlit")
 
 ## Setup
 
@@ -21,7 +22,12 @@ This repository provides an example of how to build a Retrieval-Augmented Genera
 
 4.  **Install dependencies:**
     ```bash
-    pip install -r requirements.txt
+    uv sync
+    ```
+
+    If you don't have uv installed, you should install it first by running
+    ```bash
+    pip install uv
     ```
 
 5.  **Set up environment variables:**
