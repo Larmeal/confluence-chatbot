@@ -31,7 +31,7 @@ This repository provides an example of how to build a Retrieval-Augmented Genera
     ```
 
 5.  **Set up environment variables:**
-    Create a `.env` file in the root `confluence_rag_chatbot/` directory with your credentials:
+    Create a `.env` file in the directory with your credentials:
     ```env
     GOOGLE_API_KEY="your_google_api_key" # From Google Cloud Console
     CONFLUENCE_URL="https://your-domain.atlassian.net/wiki"
@@ -45,4 +45,4 @@ This repository provides an example of how to build a Retrieval-Augmented Genera
     PINECONE_NAMESPACE="your_pinecone_namespace"
     # CONFLUENCE_MAX_DOCS="5" # Optional: limit documents for faster testing
     ```
-    *   Replace placeholders with your actual Google API key and Confluence details.
+    *   Replace placeholders with your actual Google API key, Confluence and Pinecone database details.
