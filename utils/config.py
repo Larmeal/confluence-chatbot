@@ -12,7 +12,7 @@ def load_config():
         "confluence_username": os.getenv("CONFLUENCE_USER"),
         "confluence_api_key": os.getenv("CONFLUENCE_API_KEY"),
         "confluence_space": os.getenv("CONFLUENCE_SPACE"),
-        "confluence_max_docs": "50",
+        "confluence_max_docs": os.getenv("CONFLUENCE_MAX_DOCS", 50),
     }
     # Basic validation
     required_keys = [

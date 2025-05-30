@@ -29,7 +29,7 @@ st.markdown("Ask questions about your Confluence documents, powered by Google Ge
 
 # --- Helper Functions ---
 @st.cache_resource(show_spinner="Loading and processing Confluence documents...")
-def initialize_rag_components(_config):
+def initialize_rag_components(_config: dict):
     """
     Loads documents, creates embeddings, vector store, and the RAG chain.
     """
