@@ -12,7 +12,7 @@ def load_config():
         "confluence_username": os.getenv("CONFLUENCE_USER"),
         "confluence_api_key": os.getenv("CONFLUENCE_API_KEY"),
         "confluence_space": os.getenv("CONFLUENCE_SPACE"),
-        "confluence_max_docs": os.getenv("CONFLUENCE_MAX_DOCS", 50),
+        "confluence_max_docs": os.getenv("CONFLUENCE_MAX_DOCS", "50"),
         "pinecone_index_name": os.getenv("PINECONE_INDEX_NAME"),
         "pinecone_cloud": os.getenv("PINECONE_CLOUD"),
         "pinecone_region": os.getenv("PINECONE_REGION"),

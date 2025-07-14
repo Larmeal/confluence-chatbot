@@ -5,7 +5,7 @@ import logging
 
 # Import utility functions
 from utils.config import APP_CONFIG
-from utils.confluence import load_confluence_documents, split_documents
+from utils.confluence import load_confluence_documents
 
 # Updated import for RAG components
 from utils.rag import (
