@@ -10,7 +10,7 @@ from langchain.prompts import PromptTemplate
 logger = logging.getLogger(__name__)
 
 
-def encode_string_to_base64(input_string, encoding="utf-8"):
+def encode_string_to_base64(input_string: str, encoding: str = "utf-8"):
     import base64
 
     try:
@@ -45,7 +45,8 @@ def get_google_llm(
             model=model_name,
             google_api_key=google_api_key,
             temperature=temperature,
-            convert_system_message_to_human=True,  # Often needed for Gemini compatibility with existing LangChain patterns
+            # Often needed for Gemini compatibility with existing LangChain patterns
+            convert_system_message_to_human=True,
         )
     except Exception as e:
         logger.error(f"Error initializing Google LLM: {e}")
@@ -127,7 +128,8 @@ def create_conversational_rag_chain(llm, vector_store, memory):
     logger.info("Creating Conversational RAG chain.")
     retriever = vector_store.as_retriever(
         search_type="similarity",
-        search_kwargs={"k": 5},  # Retrieve top 5 relevant chunks
+        # Retrieve top 5 relevant chunks
+        search_kwargs={"k": 5},
     )
 
     system_prompt = """
@@ -138,7 +140,7 @@ def create_conversational_rag_chain(llm, vector_store, memory):
     1.  Analyze the 'Context' section below, which contains relevant excerpts from Confluence.
     2.  Based *solely* on this Context, answer the 'Question'.
     3.  If you don't have enough information to answer the question, you should politely and naturally respond that you couldn't find any information related to the question. You should not try to answer using irrelevant information or external knowledge.
-    4. If the user asks a question that is not related to the Confluence documents (e.g., a general knowledge question or a greeting like "hello"), politely respond that you are designed to answer questions specifically about the provided Confluence documentation, and do so in the most natural way possible.
+    4.  If the user asks a question that is not related to the Confluence documents (e.g., a general knowledge question or a greeting like "hello"), politely respond that you are designed to answer questions specifically about the provided Confluence documentation, and do so in the most natural way possible.
     5.  Keep your answers concise and directly relevant to the question and context.
     6.  Do not make up information or offer opinions.
     7.  You must answer questions as human-like as possible and try your best to show a willingness to help the person asking.

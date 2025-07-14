@@ -10,9 +10,7 @@ logger = logging.getLogger(__name__)
 def load_confluence_documents(
     url: str, username: str, api_token: str, space_key: str, max_docs: int = 50
 ) -> list[Document] | None:
-    """
-    Loads documents from a Confluence space.
-    """
+    """Loads documents from a Confluence space."""
     try:
         logger.info(f"Loading documents from Confluence space: {space_key} at {url}")
         loader = ConfluenceLoader(
@@ -42,9 +40,7 @@ def load_confluence_documents(
 
 
 def split_documents(documents: list, chunk_size: int = 1000, chunk_overlap: int = 150):
-    """
-    Splits loaded documents into smaller chunks.
-    """
+    """Splits loaded documents into smaller chunks."""
     if not documents:
         return []
     logger.info(f"Splitting {len(documents)} documents into chunks.")
